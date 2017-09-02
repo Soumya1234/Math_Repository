@@ -1,3 +1,5 @@
+# This class provides the functionality of Complex Numbers
+# Author: Soumyadeep Ganguly
 import math
 class Complex(object):
     def __init__(self,real,imag):
