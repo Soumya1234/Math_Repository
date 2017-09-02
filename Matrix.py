@@ -1,4 +1,5 @@
 ## This module is written to provide full functionality related to matrix algebra
+## authored by Soumyadeep Ganguly
 class Matrix(object):
     def __init__(self,x,y,init_value):
         self.row=x
