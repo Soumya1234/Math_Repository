@@ -37,13 +37,13 @@ class Complex(object):
         temp.real=self.real
         temp.imag=-self.imag
         return temp
-
+    # Overloaded Multiplication "*" operator
     def __mul__(self,a):
         temp=Complex(0,0)
         temp.real=(self.real*a.real-self.imag*a.imag)
         temp.imag=(self.imag*a.real+self.real*a.imag)
         return temp
-
+    # Overloaded Division "/" operator
     def __div__(self,a):
         temp=Complex(0,0)
         temp=self*a.getConjugate()
@@ -51,5 +51,22 @@ class Complex(object):
         temp.imag=temp.imag/a.getMagnitude()
         return temp
 
+    def __str__(self):
+        return "%d+j%d" %(self.real,self.imag)
+
+    def __repr__(self):
+        return "%d+j%d" %(self.real,self.imag) 
+
+    def setReal(self,value):
+        self.real=value
+    
+    def setImag(self,value):
+        self.imag=value
+
+    def getReal(self):
+        return self.real
+
+    def getImag(self):
+        return self.imag
 
 
