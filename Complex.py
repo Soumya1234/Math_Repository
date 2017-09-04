@@ -2,48 +2,24 @@
 # Author: Soumyadeep Ganguly
 import math
 class Complex(object):
+    #Constructor for the Complex object
     def __init__(self,real,imag):
         self.real=real
         self.imag=imag
 
-    def show(self):
-        if self.imag<0:
-            print "%s-i%s" %(self.real,-self.imag)
-        elif self.imag==0:
-            print self.real
-        else:
-           print "%s+i%s" %(self.real,self.imag)
-    
-    def __add__(self,complex_object):
-        _sum=Complex(0,0)
-        _sum.real=self.real+complex_object.real
-        _sum.imag=self.imag+complex_object.imag       
-        return _sum
+    #Overloaded "+" operator
+    def __add__(self,complex_object):       
+        return Complex(self.real+complex_object.real,self.imag+complex_object.imag)
 
-    def __sub__(self,complex_object):
-        difference=Complex(0,0)
-        difference.real=self.real-complex_object.real
-        difference.imag=self.imag-complex_object.imag       
-        return difference
+    #Overloaded "-" operator
+    def __sub__(self,complex_object):      
+        return Complex(self.real-complex_object.real,self.imag-complex_object.imag)
 
-    def getMagnitude(self):
-        return math.sqrt(self.real*self.real+self.imag*self.imag)
-
-    def getAmplitude(self):
-        return (math.atan(float(self.imag)/float(self.real))*(180/math.pi))
-
-    def getConjugate(self):
-        temp=Complex(0,0)
-        temp.real=self.real
-        temp.imag=-self.imag
-        return temp
-    # Overloaded Multiplication "*" operator
+     # Overloaded "*" operator
     def __mul__(self,a):
-        temp=Complex(0,0)
-        temp.real=(self.real*a.real-self.imag*a.imag)
-        temp.imag=(self.imag*a.real+self.real*a.imag)
-        return temp
-    # Overloaded Division "/" operator
+        return Complex(self.real*a.real-self.imag*a.imag,self.imag*a.real+self.real*a.imag)
+
+    # Overloaded "/" operator
     def __div__(self,a):
         temp=Complex(0,0)
         temp=self*a.getConjugate()
@@ -51,22 +27,32 @@ class Complex(object):
         temp.imag=temp.imag/a.getMagnitude()
         return temp
 
-    def __str__(self):
-        return "%d+j%d" %(self.real,self.imag)
+    # Function to get Magnitude of the Complex Number
+    def getMagnitude(self):
+        return math.sqrt(self.real*self.real+self.imag*self.imag)
 
+    # Function to get Amplitude in Degree
+    def getAmplitude(self):
+        return (math.atan(float(self.imag)/float(self.real))*(180/math.pi))
+
+    # Function to Obtain Complex Conjugate of the Complex Number 
+    def getConjugate(self):
+        return Complex(self.real,-self.imag)
+
+    # String representation of the Complex Number in the "x+jy" form 
     def __repr__(self):
-        return "%d+j%d" %(self.real,self.imag) 
+        if self.imag<0:
+            return "%0.4f-j%0.4f" %(self.real,-self.imag)
+        else:
+            return "%0.4f+j%0.4f" %(self.real,self.imag)
 
+    # Function for setting the Real Part
     def setReal(self,value):
         self.real=value
     
+    #Function for setting the Imaginary part
     def setImag(self,value):
         self.imag=value
 
-    def getReal(self):
-        return self.real
-
-    def getImag(self):
-        return self.imag
 
 

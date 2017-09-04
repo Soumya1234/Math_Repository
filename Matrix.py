@@ -10,7 +10,7 @@ class Matrix(object):
     def __init__(self,x,y,init_value): #Passes a reference of a Complex Object "init_value"
         self.row=x
         self.column=y
-        self.matrix_list=[[Complex(init_value.getReal(),init_value.getImag()) for i in range(y)] for j in range(x)]
+        self.matrix_list=[[Complex(init_value.real,init_value.imag) for i in range(y)] for j in range(x)]
 
     #Function for printing the matrix in terminal
     def print_matrix(self):
@@ -23,13 +23,13 @@ class Matrix(object):
 
     #Function for adding a value "value" to the (i,j)th position in the matrix
     def addValue(self,i,j,value):
-        self.matrix_list[i][j].setReal(value.getReal())
-        self.matrix_list[i][j].setImag(value.getImag())
+        self.matrix_list[i][j].setReal(value.real)
+        self.matrix_list[i][j].setImag(value.imag)
 
     #Function for addition of Matrices
-    def addToMatrix(self,a):
+    def __add__(self,a):
         if self.row==a.row and self.column==a.column:
-            sum=Matrix(self.row,self.column,None)
+            sum=Matrix(self.row,self.column,Complex(0,0))
             for i in range(self.row):
                 for j in range(self.column):
                     sum.matrix_list[i][j]=self.matrix_list[i][j]+a.matrix_list[i][j]
@@ -38,12 +38,12 @@ class Matrix(object):
             raise Wrong_Dimensions,"Matrix Dimensions Mismatch"
 
     #Function for Multiplication of Matrices
-    def multiplyTo(self,a):
+    def __mul__(self,a):
         if self.column == a.row:
-            product=Matrix(self.row,a.column,None)
+            product=Matrix(self.row,a.column,Complex(0,0))
             for x in range(self.row):
                 for y in range(a.column):
-                    sum=0
+                    sum=Complex(0,0)
                     for i in range(self.column):
                         sum=sum+self.matrix_list[x][i]*a.matrix_list[i][y]
                     product.matrix_list[x][y]=sum
