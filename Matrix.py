@@ -11,9 +11,11 @@ class Matrix(object):
         self.row=x
         self.column=y
         self.matrix_list=[[Complex(init_value.real,init_value.imag) for i in range(y)] for j in range(x)]
-
+        
+        
     #Function for printing the matrix in terminal
     def print_matrix(self):
+        print "\n"
         for i in range(self.row):
             print self.matrix_list[i]
     
@@ -54,7 +56,7 @@ class Matrix(object):
     #Function for Cofactor of (a,b)th element
     def getCoFactor(self,a,b):
         if self.row==self.column:
-            temp=Matrix(self.row-1,self.column-1,None)
+            temp=Matrix(self.row-1,self.column-1,Complex(0,0))
             i=0
             j=0
             for r in range(self.row):
@@ -69,6 +71,8 @@ class Matrix(object):
         else:
             raise Wrong_Dimensions,"Co factor can only be found against square matrix"
 
+
+        
 #Exception class specific to Matrix Dimensions
 class Wrong_Dimensions(Exception):
     def __init__(self,argument):
