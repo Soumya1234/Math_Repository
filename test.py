@@ -11,7 +11,7 @@ for i in range(m.row):
 m.print_matrix()
 """
 m=Matrix(3,3,Complex(0,0))
-m.addValue (0,0,Complex(1,0))
+m.addValue (0,0,Complex(1,1))
 m.addValue (0,1,Complex(3,0))
 m.addValue (0,2,Complex(2,0))
 m.addValue (1,0,Complex(4,0))
