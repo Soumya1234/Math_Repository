@@ -23,8 +23,8 @@ class Complex(object):
     def __div__(self,a):
         temp=Complex(0,0)
         temp=self*a.getConjugate()
-        temp.real=temp.real/a.getMagnitude()
-        temp.imag=temp.imag/a.getMagnitude()
+        temp.real=temp.real/(a.getMagnitude()*a.getMagnitude())
+        temp.imag=temp.imag/(a.getMagnitude()*a.getMagnitude())
         return temp
 
     # Function to get Magnitude of the Complex Number

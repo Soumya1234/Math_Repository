@@ -52,6 +52,14 @@ class Matrix(object):
             return product
         else:
             raise Wrong_Dimensions,"Matrices not compatiple for multiplication"
+    
+    #Function to obtain division by scalar
+    def divideByScalar(self,a):
+        temp=Matrix(self.row,self.column,Complex(0,0))
+        for i in range(self.row):
+            for j in range(self.column):
+                temp.matrix_list[i][j]=self.matrix_list[i][j]/a
+        return temp
 
     #Function for Cofactor Matrix of (a,b)th element
     def getCoFactorMatrix(self,a,b):
@@ -94,7 +102,7 @@ class Matrix(object):
     
     #Function to determine the cofactor of the (i,j)th element of the matrix
     def getCoFactor(self,i,j):
-        return (self.getCoFactorMatrix(i,j).det())*((-1)**(1+(j+1)))
+        return (self.getCoFactorMatrix(i,j).det())*((-1)**(i+1+(j+1)))
     
     #Function to determine the Adjoint matrix 
     def getAdjointMatrix(self):
@@ -103,7 +111,14 @@ class Matrix(object):
             for j in range(self.column):
                 temp.matrix_list[i][j]=self.getCoFactor(i,j)
         return temp.transpose()
-
+    
+    #Function to obtain inverse of Matrix
+    def inverse(self):
+        temp=Matrix(self.row,self.column,Complex(0,0))
+        for i in range(self.row):
+            for j in range(self.column):
+                temp.matrix_list[i][j]=self.getAdjointMatrix().divideByScalar(self.det()).matrix_list[i][j]
+        return temp
 
 
 #Exception class specific to Matrix Dimensions
