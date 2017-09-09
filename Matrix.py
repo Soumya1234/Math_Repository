@@ -53,8 +53,8 @@ class Matrix(object):
         else:
             raise Wrong_Dimensions,"Matrices not compatiple for multiplication"
 
-    #Function for Cofactor of (a,b)th element
-    def getCoFactor(self,a,b):
+    #Function for Cofactor Matrix of (a,b)th element
+    def getCoFactorMatrix(self,a,b):
         if self.row==self.column:
             temp=Matrix(self.row-1,self.column-1,Complex(0,0))
             i=0
@@ -73,15 +73,39 @@ class Matrix(object):
 
     #Function to find out Determinant of the matrix
     def det(self):
+        if self.row <> self.column:
+            raise Wrong_Dimensions,"Determinant can only be found against square matrix"
         if self.row==1 and self.column==1:
             return self.matrix_list[0][0]
         else:
             sum=Complex(0,0)
             for j in range(self.column):
-                x=self.matrix_list[0][j]*(self.getCoFactor(0,j).det())*((-1)**(1+(j+1)))
+                x=self.matrix_list[0][j]*(self.getCoFactorMatrix(0,j).det())*((-1)**(1+(j+1)))
                 sum=sum+x
             return sum
         
+    #Function to obtain the Transpose of Matrix
+    def transpose(self):
+        temp=Matrix(self.column,self.row,Complex(0,0))
+        for i in range(self.row):
+            for j in range(self.column):
+                temp.matrix_list[j][i]=self.matrix_list[i][j]
+        return temp
+    
+    #Function to determine the cofactor of the (i,j)th element of the matrix
+    def getCoFactor(self,i,j):
+        return (self.getCoFactorMatrix(i,j).det())*((-1)**(1+(j+1)))
+    
+    #Function to determine the Adjoint matrix 
+    def getAdjointMatrix(self):
+        temp=Matrix(self.row,self.column,Complex(0,0))
+        for i in range(self.row):
+            for j in range(self.column):
+                temp.matrix_list[i][j]=self.getCoFactor(i,j)
+        return temp
+
+
+
 #Exception class specific to Matrix Dimensions
 class Wrong_Dimensions(Exception):
     def __init__(self,argument):
