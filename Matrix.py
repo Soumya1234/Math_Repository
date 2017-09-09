@@ -102,7 +102,7 @@ class Matrix(object):
         for i in range(self.row):
             for j in range(self.column):
                 temp.matrix_list[i][j]=self.getCoFactor(i,j)
-        return temp
+        return temp.transpose()
 
 
 
