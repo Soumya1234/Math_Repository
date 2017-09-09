@@ -71,7 +71,16 @@ class Matrix(object):
         else:
             raise Wrong_Dimensions,"Co factor can only be found against square matrix"
 
-
+    #Function to find out Determinant of the matrix
+    def det(self):
+        if self.row==1 and self.column==1:
+            return self.matrix_list[0][0]
+        else:
+            sum=Complex(0,0)
+            for j in range(self.column):
+                x=self.matrix_list[0][j]*(self.getCoFactor(0,j).det())*((-1)**(1+(j+1)))
+                sum=sum+x
+            return sum
         
 #Exception class specific to Matrix Dimensions
 class Wrong_Dimensions(Exception):
