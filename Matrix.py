@@ -120,6 +120,22 @@ class Matrix(object):
                 temp.matrix_list[i][j]=self.getAdjointMatrix().divideByScalar(self.det()).matrix_list[i][j]
         return temp
 
+    #Functio to add values from list
+    def addFromList(self,a):
+        k=0
+        i=0
+        j=0
+        while k <= self.row*self.column-1:
+            self.addValue(i,j,a[k])
+            j=j+1
+            if j==self.column-1:
+                k=k+1
+                self.addValue(i,j,a[k])
+                i=i+1
+                j=0
+            k=k+1
+
+
 
 #Exception class specific to Matrix Dimensions
 class Wrong_Dimensions(Exception):
